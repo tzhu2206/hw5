@@ -76,86 +76,125 @@ window.addEventListener('DOMContentLoaded', async function() {
   let rideData = await fetch('https://kiei451.com/api/rides.json')
   let allRides = await rideData.json()
   let buttons = [allRidesButton, nooberPurpleButton, nooberPoolButton, nooberXLButton, nooberXButton]
+  let levelOfServiceList = ['all', 'Noober Purple', 'Noober Pool', 'Noober XL', 'Noober X']
+  let button
+  let background
 
   function clearBG(buttons){
     for (let n = 0; n < buttons.length; n++){
-      let button = buttons[n]
-      button.classList.remove('bg-blue-200')
-      button.classList.remove('bg-purple-200')
+      let b = buttons[n]
+      b.classList.remove('bg-blue-200')
+      b.classList.remove('bg-purple-200')
     }
   }
 
-  allRidesButton.addEventListener('click', async function(event){
-    event.preventDefault()
-    console.log('You are viewing all rides.')
-    clearBG(buttons)
-    allRidesButton.classList.add('bg-blue-200')
-    document.querySelector('.rides').innerHTML = ''
-    renderRides(allRides)
-  })
+  function getBG(levelOfService){
+    if (levelOfService == 'Noober Purple'){
+      background = 'bg-purple-200'
+    } else{
+      background = 'bg-blue-200'
+    }
+  }
 
-  nooberPurpleButton.addEventListener('click', async function(event){
-    event.preventDefault()
-    console.log('You are viewing Noober Purple rides.')
-    clearBG(buttons)
-    nooberPurpleButton.classList.add('bg-purple-200')
-    document.querySelector('.rides').innerHTML = ''
-    let purpleRides = []
-    for (let i = 0; i < allRides.length; i++){
-      let ride = allRides[i]
-      if (levelOfService(ride) == 'Noober Purple'){
-        purpleRides.push(ride)
+  for (let r = 0; r < buttons.length; r++){
+    button = buttons[r]
+    button.addEventListener('click', async function(event){
+      event.preventDefault()
+      // clearBG(buttons)
+      // getBG(levelOfServiceList[r])
+      // button.classList.add(background)
+      // Couldn't get the button shading to work with this looped version, the color is correct on each click but only the last button gets the background color
+      console.log(`You are viewing ${levelOfServiceList[r]} rides.`)
+      document.querySelector('.rides').innerHTML = ''
+      let selectedRides = []
+      if (levelOfServiceList[r] == 'all'){
+        for (let z = 0; z < allRides.length; z++){
+          let ride = allRides[z]
+          selectedRides.push(ride)
+        }
+      } else{
+        for (let i = 0; i < allRides.length; i++){
+          let ride = allRides[i]
+          if (levelOfService(ride) == levelOfServiceList[r]){
+            selectedRides.push(ride)
+          }
+        }
       }
-    }
-    renderRides(purpleRides)
-  })
+      renderRides(selectedRides)
+    })
+  }
+
+  // allRidesButton.addEventListener('click', async function(event){
+  //   event.preventDefault()
+  //   console.log('You are viewing all rides.')
+  //   clearBG(buttons)
+  //   allRidesButton.classList.add('bg-blue-200')
+  //   document.querySelector('.rides').innerHTML = ''
+  //   renderRides(allRides)
+  // })
+
+  // nooberPurpleButton.addEventListener('click', async function(event){
+  //   event.preventDefault()
+  //   console.log('You are viewing Noober Purple rides.')
+  //   clearBG(buttons)
+  //   nooberPurpleButton.classList.add('bg-purple-200')
+  //   document.querySelector('.rides').innerHTML = ''
+  //   let purpleRides = []
+  //   for (let i = 0; i < allRides.length; i++){
+  //     let ride = allRides[i]
+  //     if (levelOfService(ride) == 'Noober Purple'){
+  //       purpleRides.push(ride)
+  //     }
+  //   }
+  //   renderRides(purpleRides)
+  // })
   
-  nooberPoolButton.addEventListener('click', async function(event){
-    event.preventDefault()
-    console.log('You are viewing Noober Pool rides.')
-    clearBG(buttons)
-    nooberPoolButton.classList.add('bg-blue-200')
-    document.querySelector('.rides').innerHTML = ''
-    let poolRides = []
-    for (let i = 0; i < allRides.length; i++){
-      let ride = allRides[i]
-      if (levelOfService(ride) == 'Noober Pool'){
-        poolRides.push(ride)
-      }
-    }
-    renderRides(poolRides)
-  })
+  // nooberPoolButton.addEventListener('click', async function(event){
+  //   event.preventDefault()
+  //   console.log('You are viewing Noober Pool rides.')
+  //   clearBG(buttons)
+  //   nooberPoolButton.classList.add('bg-blue-200')
+  //   document.querySelector('.rides').innerHTML = ''
+  //   let poolRides = []
+  //   for (let i = 0; i < allRides.length; i++){
+  //     let ride = allRides[i]
+  //     if (levelOfService(ride) == 'Noober Pool'){
+  //       poolRides.push(ride)
+  //     }
+  //   }
+  //   renderRides(poolRides)
+  // })
   
-  nooberXLButton.addEventListener('click', async function(event){
-    event.preventDefault()
-    console.log('You are viewing Noober XL rides.')
-    clearBG(buttons)
-    nooberXLButton.classList.add('bg-blue-200')
-    document.querySelector('.rides').innerHTML = ''
-    let xLRides = []
-    for (let i = 0; i < allRides.length; i++){
-      let ride = allRides[i]
-      if (levelOfService(ride) == 'Noober XL'){
-        xLRides.push(ride)
-      }
-    }
-    renderRides(xLRides)
-  })
+  // nooberXLButton.addEventListener('click', async function(event){
+  //   event.preventDefault()
+  //   console.log('You are viewing Noober XL rides.')
+  //   clearBG(buttons)
+  //   nooberXLButton.classList.add('bg-blue-200')
+  //   document.querySelector('.rides').innerHTML = ''
+  //   let xLRides = []
+  //   for (let i = 0; i < allRides.length; i++){
+  //     let ride = allRides[i]
+  //     if (levelOfService(ride) == 'Noober XL'){
+  //       xLRides.push(ride)
+  //     }
+  //   }
+  //   renderRides(xLRides)
+  // })
   
-  nooberXButton.addEventListener('click', async function(event){
-    event.preventDefault()
-    console.log('You are viewing Noober X rides.')
-    clearBG(buttons)
-    nooberXButton.classList.add('bg-blue-200')
-    document.querySelector('.rides').innerHTML = ''
-    let xRides = []
-    for (let i = 0; i < allRides.length; i++){
-      let ride = allRides[i]
-      if (levelOfService(ride) == 'Noober X'){
-        xRides.push(ride)
-      }
-    }
-    renderRides(xRides)
-  })
+  // nooberXButton.addEventListener('click', async function(event){
+  //   event.preventDefault()
+  //   console.log('You are viewing Noober X rides.')
+  //   clearBG(buttons)
+  //   nooberXButton.classList.add('bg-blue-200')
+  //   document.querySelector('.rides').innerHTML = ''
+  //   let xRides = []
+  //   for (let i = 0; i < allRides.length; i++){
+  //     let ride = allRides[i]
+  //     if (levelOfService(ride) == 'Noober X'){
+  //       xRides.push(ride)
+  //     }
+  //   }
+  //   renderRides(xRides)
+  // })
 })
 
