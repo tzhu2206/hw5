@@ -67,7 +67,76 @@ function renderRides(ridesArray) {
   }
 }
 
-window.addEventListener('DOMContentLoaded', function() {
-  // YOUR CODE
+window.addEventListener('DOMContentLoaded', async function() {
+  let allRidesButton = document.querySelector('#all-filter')
+  let nooberPurpleButton = document.querySelector('#noober-purple-filter')
+  let nooberPoolButton = document.querySelector('#noober-pool-filter')
+  let nooberXLButton = document.querySelector('#noober-xl-filter')
+  let nooberXButton = document.querySelector('#noober-x-filter')
+  let rideData = await fetch('https://kiei451.com/api/rides.json')
+  let allRides = await rideData.json()
+
+  allRidesButton.addEventListener('click', async function(event){
+    event.preventDefault()
+    console.log('You are viewing all rides.')
+    document.querySelector('.rides').innerHTML = ''
+    renderRides(allRides)
+  })
+
+  nooberPurpleButton.addEventListener('click', async function(event){
+    event.preventDefault()
+    console.log('You are viewing Noober Purple rides.')
+    document.querySelector('.rides').innerHTML = ''
+    let purpleRides = []
+    for (let i = 0; i < allRides.length; i++){
+      let ride = allRides[i]
+      if (levelOfService(ride) == 'Noober Purple'){
+        purpleRides.push(ride)
+      }
+    }
+    renderRides(purpleRides)
+  })
+  
+  nooberPoolButton.addEventListener('click', async function(event){
+    event.preventDefault()
+    console.log('You are viewing Noober Pool rides.')
+    document.querySelector('.rides').innerHTML = ''
+    let poolRides = []
+    for (let i = 0; i < allRides.length; i++){
+      let ride = allRides[i]
+      if (levelOfService(ride) == 'Noober Pool'){
+        poolRides.push(ride)
+      }
+    }
+    renderRides(poolRides)
+  })
+  
+  nooberXLButton.addEventListener('click', async function(event){
+    event.preventDefault()
+    console.log('You are viewing Noober XL rides.')
+    document.querySelector('.rides').innerHTML = ''
+    let xLRides = []
+    for (let i = 0; i < allRides.length; i++){
+      let ride = allRides[i]
+      if (levelOfService(ride) == 'Noober XL'){
+        xLRides.push(ride)
+      }
+    }
+    renderRides(xLRides)
+  })
+  
+  nooberXButton.addEventListener('click', async function(event){
+    event.preventDefault()
+    console.log('You are viewing Noober X rides.')
+    document.querySelector('.rides').innerHTML = ''
+    let xRides = []
+    for (let i = 0; i < allRides.length; i++){
+      let ride = allRides[i]
+      if (levelOfService(ride) == 'Noober X'){
+        xRides.push(ride)
+      }
+    }
+    renderRides(xRides)
+  })
 })
 
