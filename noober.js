@@ -89,7 +89,7 @@ window.addEventListener('DOMContentLoaded', async function() {
     event.preventDefault()
     console.log('You are viewing all rides.')
     clearBG(buttons)
-    allRidesButton.className += ' bg-blue-200'
+    allRidesButton.classList.add('bg-blue-200')
     document.querySelector('.rides').innerHTML = ''
     renderRides(allRides)
   })
@@ -98,7 +98,7 @@ window.addEventListener('DOMContentLoaded', async function() {
     event.preventDefault()
     console.log('You are viewing Noober Purple rides.')
     clearBG(buttons)
-    nooberPurpleButton.className += ' bg-purple-200'
+    nooberPurpleButton.classList.add('bg-purple-200')
     document.querySelector('.rides').innerHTML = ''
     let purpleRides = []
     for (let i = 0; i < allRides.length; i++){
@@ -114,7 +114,7 @@ window.addEventListener('DOMContentLoaded', async function() {
     event.preventDefault()
     console.log('You are viewing Noober Pool rides.')
     clearBG(buttons)
-    nooberPoolButton.className += ' bg-blue-200'
+    nooberPoolButton.classList.add('bg-blue-200')
     document.querySelector('.rides').innerHTML = ''
     let poolRides = []
     for (let i = 0; i < allRides.length; i++){
@@ -130,7 +130,7 @@ window.addEventListener('DOMContentLoaded', async function() {
     event.preventDefault()
     console.log('You are viewing Noober XL rides.')
     clearBG(buttons)
-    nooberXLButton.className += ' bg-blue-200'
+    nooberXLButton.classList.add('bg-blue-200')
     document.querySelector('.rides').innerHTML = ''
     let xLRides = []
     for (let i = 0; i < allRides.length; i++){
@@ -146,7 +146,7 @@ window.addEventListener('DOMContentLoaded', async function() {
     event.preventDefault()
     console.log('You are viewing Noober X rides.')
     clearBG(buttons)
-    nooberXButton.className += ' bg-blue-200'
+    nooberXButton.classList.add('bg-blue-200')
     document.querySelector('.rides').innerHTML = ''
     let xRides = []
     for (let i = 0; i < allRides.length; i++){
