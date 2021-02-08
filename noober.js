@@ -67,14 +67,12 @@ function renderRides(ridesArray) {
   }
 }
 
-window.addEventListener('DOMContentLoaded', async function() {
+window.addEventListener('DOMContentLoaded', function() {
   let allRidesButton = document.querySelector('#all-filter')
   let nooberPurpleButton = document.querySelector('#noober-purple-filter')
   let nooberPoolButton = document.querySelector('#noober-pool-filter')
   let nooberXLButton = document.querySelector('#noober-xl-filter')
   let nooberXButton = document.querySelector('#noober-x-filter')
-  let rideData = await fetch('https://kiei451.com/api/rides.json')
-  let allRides = await rideData.json()
   let buttons = [allRidesButton, nooberPurpleButton, nooberPoolButton, nooberXLButton, nooberXButton]
   let levelOfServiceList = ['all', 'Noober Purple', 'Noober Pool', 'Noober XL', 'Noober X']
   let button
@@ -100,6 +98,8 @@ window.addEventListener('DOMContentLoaded', async function() {
     button = buttons[r]
     button.addEventListener('click', async function(event){
       event.preventDefault()
+      let rideData = await fetch('https://kiei451.com/api/rides.json')
+      let allRides = await rideData.json()
       // clearBG(buttons)
       // getBG(levelOfServiceList[r])
       // button.classList.add(background)
